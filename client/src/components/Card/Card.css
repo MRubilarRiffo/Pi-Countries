@@ -1,0 +1,7 @@
+.containerCard {
+    width: 200px;
+    height: 300px;
+    background-color: #1A1A1A;
+    border-radius: 15px;
+    padding: 1.2em;
+}

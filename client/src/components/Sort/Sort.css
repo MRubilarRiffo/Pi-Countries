@@ -1,0 +1,9 @@
+.container ul{
+    display: flex;
+    flex-wrap: wrap;
+    width: 250px;
+    list-style: none;
+}
+.container li{
+    width: 100%;
+}
