@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
+import "./Landing.css";
 
 const Landing = () => {
     return (
-        <div>
-            <h1>Paises</h1>
+        <div className='container-landing'>
+            {/* <img src="../../assets/mapa.webp" alt="" /> */}
+            <h1>COUNTRIES</h1>
 			<div className="card">
                 <Link to='/app'><button>Play!</button></Link>
-				<p>
-					Llenar después
-				</p>
+				<p>Embark on a global adventure</p>
 			</div>
         </div>
     );

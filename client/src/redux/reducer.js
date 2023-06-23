@@ -6,7 +6,8 @@ import { GET_COUNTRIES,
     FILTER_BY_CONTINENT,
     SORT_BY_DEFAULT,
     PAGINACION,
-    ADD_ACTIVITIES } from "./actions-type";
+    GET_ACTIVITIES,
+    DELETE_ACTIVITIES } from "./actions-type";
 
 const initialState = {
     countries: [],
@@ -64,11 +65,16 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 pagina: action.payload
             };
-        case ADD_ACTIVITIES:
+        case GET_ACTIVITIES:
             return {
                 ...state,
-                activities: [...state.activities, action.payload]
+                activities: [...state.activities, action.payload].flat()
             };
+        case DELETE_ACTIVITIES:
+            return {
+                ...state,
+                activities: [...state.activities.filter(c => c.id !== action.payload)]
+            }
         default:
             return {...state};
     };

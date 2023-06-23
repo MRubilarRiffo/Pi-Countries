@@ -2,9 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDetails } from "../../redux/actions";
 import { useEffect } from "react";
+import "./Details.css"
+import { Card_Activities } from "../Card/Card_Activities";
 
 const Details = () => {
     const { id } = useParams();
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,18 +17,41 @@ const Details = () => {
     const props = useSelector((state) => state.details);
 
     return (
-        <div>
-            <div>
-                <img src={props.flag} alt="" style={{ width: '200px' }} />
+        <>
+            <div className="tittle-activities">
+                <h1>Details</h1>
             </div>
-            <h1>{props.name}</h1>
-            <p>Id: {props.id}</p>
-            <p>Continente: {props.continent}</p>
-            <p>Capital: {props.capital ? props.capital.join(' - ') : '-'}</p>
-            <p>Sub-región: {props.subregion}</p>
-            <p>Área: {props.area}</p>
-            <p>Población: {props.population}</p>
-        </div>
+            <div className="container-details">
+                <div className="container-tittle-details">
+                    <h2>{props.name}</h2>
+                    <hr />
+                </div>
+                <div className="container-img-props-details">
+                    <div className="container-img-details">
+                        <img src={props.flag} alt="" />
+                    </div>
+                    <div className="container-props-details">
+                        <div className="props-1-details">
+                            <p>Id</p>
+                            <p>Continent</p>
+                            <p>Capital</p>
+                            <p>Subregion</p>
+                            <p>Area</p>
+                            <p>Population</p>
+                        </div>
+                        <div className="props-2-details">
+                            <p>{props.id}</p>
+                            <p>{props.continent}</p>
+                            <p>{props.capital ? props.capital.join(' - ') : '-'}</p>
+                            <p>{props.subregion}</p>
+                            <p>{props.area} m²</p>
+                            <p>{props.population}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {props.Activities && <Card_Activities activities={props.Activities}/>}
+        </>
     );
 };
 

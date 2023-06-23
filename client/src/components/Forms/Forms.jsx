@@ -1,99 +1,113 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addActivities } from "../../redux/actions";
+import { createActivities } from "../../redux/actions";
+import validation from "./validation";
+import "./Forms.css";
 
 const Forms = () => {
-    const activities = useSelector((state) => state.activities);
-    console.log(activities)
-
     const dispatch = useDispatch();
 
     const countries = useSelector((state) => state.countriesCopy);
 
-    const createLength = (i) => Array.from({ length: i }, (_, index) => index);
+    const createLength = (i) => Array.from({ length: i }, (_, index) => index + 1);
     
     const options = {
-        difficulty: ["Baja", "Media", "Alta"],
+        // difficulty: createLength(5),
+        difficulty:[ "Easy", "Moderate", "Intermediate", "Difficult", "Extreme" ],
         season: ["Otoño", "Invierno", "Primavera", "Verano"],
         countries: countries.map((props) => props.name),
-        duration: {
-            days: createLength(101),
-            hours: createLength(24),
-            minutes: createLength(60)
-        }
     };
 
     const [activity, setActivity] = useState({
         name: "",
-        difficulty: "",
-        duration: "",
-        season: "",
+        difficulty: "Easy",
+        duration: "0",
+        season: "Otoño",
         countries: []
     });
 
-    const handleChange = (event) => {
-        setActivity({
-            ...activity,
-            [event.target.name]: event.target.value,
-        });
+    const [error, setError] = useState({});
+
+    const handleChange = ({ target: { value, name }}) => {
+        if (name === "countries") {
+            const isOptionSelected = activity.countries.includes(value);
+
+            setActivity({
+                ...activity,
+                [name]: isOptionSelected
+                            ? activity.countries.filter(option => option !== value)
+                            : [...activity.countries, value]
+            });
+        } else {
+            setActivity({
+                ...activity,
+                [name]: value,
+            });
+        };
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(addActivities(activity));
-    };
-
-    const handleSelectChange = (event) => {
-        const optionValue = event.target.value;
-        const isOptionSelected = activity.countries.includes(optionValue);
-
-        setActivity({
-            ...activity,
-            [event.target.name]: isOptionSelected
-                                    ? activity.countries.filter(option => option !== optionValue)
-                                    : [...activity.countries, optionValue]
-        });
+        if(activity.name.length < 3 || !activity.countries.length || activity.duration < 1 || isNaN(activity.duration) || !activity.duration.length) {
+            setError(validation({...activity, [event.target.name]: event.target.value }));
+        } else {
+            dispatch(createActivities(activity));
+        };
     };
 
     return (
-        <div>
-            <form>
-                <h1>Agregar Actividad</h1>
-                <label htmlFor="name">Nombre: </label>
-                <input type="text" name="name" value={activity.name} onChange={handleChange}/>
-                <hr />
-                <label htmlFor="difficulty">Dificultad: </label>
-                <select name="difficulty" value={activity.difficulty} onChange={handleChange}>
-                    {options.difficulty.map((props) => <option key={props} value={props}>{props}</option>)}
-                </select>
-                <hr />
-                <label htmlFor="season">Duración: </label>
-                <select name="season" value={activity.season} onChange={handleChange}>
-                    {options.season.map((props) => <option key={props} value={props}>{props}</option>)}
-                </select>
-                <hr />
-                <label htmlFor="countries">Paises: </label>
-                <select name="countries" value={activity.countries} onChange={handleSelectChange} multiple>
-                    {options.countries.map((props) => <option key={props} value={props}>{props}</option>)}
-                </select>
-                <div>
-                    <p>Opciones seleccionadas: {activity.countries.join(' - ')}</p>
+        <div className="container-all-form">
+            <div className="card-forms">
+                <div className="container-tittle-details">
+                    <h2>Form</h2>
+                    <hr />
                 </div>
-                <hr />
-
-                <label htmlFor="duration">Duration: </label>
-                {Object.keys(options.duration).map(key => (
-                    <>
-                        <select name={`duration-${key}`} value={activity.duration.key} onChange={handleChange}>
-                            {options.duration[key].map((props) => <option key={props} value={props}>{props}</option>)}
-                        </select>
-                        <span> {key} </span>
-                    </>
-                ))}
-
-            </form>
-
-            <button type="SUBMIT" onClick={handleSubmit}>Agregar</button>
+                <div className="container-form">
+                    <form>
+                        <div className="container-label-options">
+                            <div className="label-error">
+                                <label htmlFor="name">Name </label>
+                                {error.n1 && <p>{error.n1}</p>}
+                            </div>
+                            <input type="text" name="name" value={activity.name} onChange={handleChange} />
+                        </div>
+                        <div className="container-label-options">
+                            <label htmlFor="difficulty">Difficulty </label>
+                            <select name="difficulty" value={activity.difficulty} onChange={handleChange}>
+                                {options.difficulty.map((props) => <option key={props} value={props}>{props}</option>)}
+                            </select>
+                        </div>
+                        <div className="container-label-options">
+                            <div className="label-error">
+                                <label htmlFor="duration">Duration (in hours) </label>
+                                {error.d1 && <p>{error.d1}</p>}
+                            </div>
+                            <input type="text" name="duration" value={activity.duration} onChange={handleChange} />
+                        </div>
+                        <div className="container-label-options">
+                            <label htmlFor="season">Season </label>
+                            <select name="season" value={activity.season} onChange={handleChange}>
+                                {options.season.map((props) => <option key={props} value={props}>{props}</option>)}
+                            </select>
+                        </div>
+                        <div className="container-label-options">
+                            <div className="label-error">
+                                <label htmlFor="countries">Countries </label>
+                                {error.c1 && <p>{error.c1}</p>}
+                            </div>
+                            <select name="countries" value={activity.countries} onChange={handleChange} multiple>
+                                {options.countries.map((props) => <option key={props} value={props}>{props}</option>)}
+                            </select>
+                        </div>
+                    </form>
+                    <div className="renderizado-countries">
+                        <p>{activity.countries.join(' - ')}</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="SUBMIT" onClick={handleSubmit}>Submit</button>
+            </div>
         </div>
     );
 };

@@ -7,7 +7,6 @@ const Paginacion = ({ max }) => {
     const dispatch = useDispatch();
 
     const pagina = useSelector((state) => state.pagina);
-    console.log(pagina)
 
     const [input, setInput] = useState(1);
 
@@ -41,11 +40,10 @@ const Paginacion = ({ max }) => {
             setInput(event.target.value);
         };
     };
-
     return (
         <div className="containerPaginacion">
             <button 
-                disabled={pagina < 2} 
+                disabled={pagina < 2 || isNaN(input) || input === "" || input != pagina} 
                 onClick={previousPage} >
                     {"<"}
             </button>
@@ -58,7 +56,7 @@ const Paginacion = ({ max }) => {
             />
             <p> de {max}</p>
             <button 
-                disabled={pagina > max - 1} 
+                disabled={pagina > max - 1 || isNaN(input) || input === "" || input != pagina} 
                 onClick={nextPage} >
                     {">"}
             </button>

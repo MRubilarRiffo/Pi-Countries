@@ -6,6 +6,7 @@ import { Paginacion } from "../Paginacion/Paginacion";
 
 const Cards = () => {
     const countries = useSelector((state) => state.countries);
+
     const pagina = useSelector((state) => state.pagina);
 
     const [porPagina, setPorPagina] = useState(10);

@@ -1,4 +1,4 @@
-const { Country } = require('../db');
+const { Country, Activity } = require('../db');
 const { Op } = require('sequelize');
 
 const getCountries = async (req, res) => {
@@ -9,7 +9,8 @@ const getCountries = async (req, res) => {
                 name: {
                     [Op.iLike]: `%${name}%`
                 }
-            }
+            },
+            include: Activity
         });
 
         return countries.length > 0

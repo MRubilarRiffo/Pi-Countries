@@ -23,6 +23,29 @@ conn.sync({ force: true })
 		await conn.models.Country.bulkCreate(countriesData);
 
 	})
+	.then(async () => {
+		const activities = [
+			{
+				name: "Playa Blanca",
+				difficulty: 1,
+				duration: 5,
+				season: "Verano"
+			},
+			{
+				name: "Nevados de Chillán",
+				difficulty: 3,
+				duration: 8,
+				season: "Invierno"
+			}
+		];
+
+		const selectedCountry = await conn.models.Country.findByPk("CHL");
+
+		const createdActivity = await conn.models.Activity.bulkCreate(activities);
+
+		await selectedCountry.addActivity(createdActivity);
+
+	})
 	.then(() => {
 		server.listen(PORT, () => {
 			console.log(`Server listening on port ${PORT}`);

@@ -1,0 +1,54 @@
+.container-all-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.card-forms {
+    display: flex;
+    width: 400px;
+    height: 450px;
+    background-color: #1A1A1A;
+    border-radius: 20px;
+    padding: 1.25em;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.container-form {
+    display: flex;
+    flex-direction: column;
+}
+.container-label-options{
+    display: flex;
+    flex-direction: column;
+}
+.container-form select{
+    text-align: right;
+}
+.label-error {
+    display: flex;
+}
+.container-label-options label{
+    vertical-align: top;
+    text-align: left;
+    font-size: 13px;
+    padding: 5px;
+}
+.container-label-options p{
+    vertical-align: top;
+    text-align: left;
+    font-size: 13px;
+    padding: 5px;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    color: red;
+    margin-Left: 40px;
+}
+.container-label-options input{
+    text-align: right;
+}
+.renderizado-countries {
+    font-size: 13px;
+    padding: 5px;
+}
