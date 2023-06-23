@@ -7,12 +7,17 @@ import { Filter } from "../Filter/Filter";
 const NavBar = () => {
     return (
         <div className="containerNavBar">
-            <Filter />
-            <Link to='/app'><button>Home</button></Link>
-            <Link to='/favorites'><button>Favoritos</button></Link>
-            <Link to='/activities'><button>Actividades</button></Link>
             <SearchBar />
-            <Sort />
+            <div className="container-button-navbar">
+                <Link to='/app'><button>Home</button></Link>
+                {/* <Link to='/favorites'><button>Favoritos</button></Link> */}
+                <Link to='/activities'><button>Activities</button></Link>
+            </div>
+            <div className="container-filter-sort-navbar">
+                <Filter />
+                <Sort />
+            </div>
+            
         </div>
     );
 };

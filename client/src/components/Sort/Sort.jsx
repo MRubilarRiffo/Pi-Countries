@@ -21,8 +21,8 @@ const Sort = () => {
     };
 
     return (
-        <div>
-            <p>Ordenar por:</p>
+        <div className="container-sort">
+            <p>Sort by</p>
             <select value={selectedOptions} onChange={handleChange}>
                 {
                     sortByArray.map((props) => <option key={props.id} value={props.id}>{props.label}</option>)

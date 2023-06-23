@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { getCountries, paginacion } from "../../redux/actions";
+import "./SearchBar.css";
 
 const SearchBar = () => {
     const [id, setId] = useState('');
@@ -14,11 +15,12 @@ const SearchBar = () => {
     };
     
     return (
-        <div>
+        <div className="conteiner-searchbar">
             <input
                 type="search"
                 onChange={handleChange}
                 value={id}
+                placeholder="Buscar..."
             />
         </div>
     );

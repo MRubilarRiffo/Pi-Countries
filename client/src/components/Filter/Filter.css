@@ -1,11 +1,11 @@
-.container-sort {
+.container-filter {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
     width: 200px;
 }
-.container-sort p {
+.container-filter p{
     vertical-align: top;
     text-align: left;
     font-size: 13px;

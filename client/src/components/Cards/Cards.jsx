@@ -25,7 +25,11 @@ const Cards = () => {
             </>
         );
     };
-    return (<h2>No hay paises para mostrar</h2>);
+    return (
+        <div className="container-oops">
+            <h3>Oops! No countries to display.</h3>
+        </div>
+    );
 };
 
 export { Cards };

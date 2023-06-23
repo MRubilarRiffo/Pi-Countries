@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { filterByContinent } from "../../redux/actions";
 import { useDispatch } from "react-redux";
+import "./Filter.css";
 
 const Filter = () => {
     const continents = [
@@ -23,8 +24,8 @@ const Filter = () => {
     };
 
     return (
-        <div>
-            <p>Filter:</p>
+        <div className="container-filter">
+            <p>Filter</p>
             <select value={selectedOptions} onChange={handleChange}>
                 {
                     continents.map((props) => <option key={props} value={props}>{props}</option>)

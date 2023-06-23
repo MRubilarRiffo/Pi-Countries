@@ -10,8 +10,12 @@ const Card = ({ props }) => {
                         <img src={props.flag} alt="" />
                     </div>
                     <div className="props-card">
-                        <h2>{props.name}</h2>
-                        <p>{props.continent}</p>
+                        <div className="container-name">
+                            <h3>{props.name}</h3>
+                        </div>
+                        <div>
+                            <p>{props.continent}</p>
+                        </div>
                     </div>
                 </Link>
             </div>

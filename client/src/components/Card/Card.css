@@ -6,11 +6,29 @@
     border-radius: 20px;
     padding: 1.25em;
 }
+.containerCard a {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .containerCard img {
     width: 200px;
     height: 150px;
 }
 .props-card {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+}
+.container-name {
+    height: 70%;
+}
+.container-name h3 {
+    color: rgba(255, 255, 255, 0.87);
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+}
+.props-card p {
+    color: rgba(255, 255, 255, 0.87);
+    margin-block-start: 0.4em;
+    margin-block-end: 0.4em;
 }
