@@ -51,6 +51,13 @@ const Forms = () => {
         if(activity.name.length < 3 || !activity.countries.length || activity.duration < 1 || isNaN(activity.duration) || !activity.duration.length) {
             setError(validation({...activity, [event.target.name]: event.target.value }));
         } else {
+            setActivity({
+                name: "",
+                difficulty: "Easy",
+                duration: "0",
+                season: "Otoño",
+                countries: []
+            });
             dispatch(createActivities(activity));
         };
     };

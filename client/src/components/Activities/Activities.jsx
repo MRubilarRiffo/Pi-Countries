@@ -10,7 +10,7 @@ const Activities = () => {
     const [formOn, setFormOn] = useState(false);
 
     return (
-        <div>
+        <div className="container-activities-r">
             <div className="tittle-activities">
                 <h1>Activities</h1>
             </div>

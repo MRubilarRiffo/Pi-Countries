@@ -22,7 +22,7 @@ function App() {
 
 	return (
 		<div className='container-app'>
-			{(pathname === '/app' || pathname === '/favorites') && <NavBar />}
+			{(pathname === '/app' || pathname === '/favorites' || pathname === '/activities' || pathname.startsWith('/details')) && <NavBar />}
 			<Routes>
 				<Route path='/' element={<Landing />} />
 				<Route path='/app' element={<Cards />} />
